@@ -20,9 +20,10 @@
 </p>
 </div>
 
-> setInterval for promises and async functions.
+> setInterval for promises and async/sync functions.
 >
-> Support graceful shutdown and prevent multiple executions from overlapping in time.
+> + __Support graceful shutdown.__
+> + __Prevent multiple executions from overlapping in time.__
 
  ## 🔗 Link
 + [Github](https://github.com/a179346/async-interval-job#readme)
@@ -33,6 +34,10 @@
 ```sh
 npm i async-interval-job
 ```
+
+## 🏆 Overview
+
+![image](https://github.com/a179346/async-interval-job/blob/main/flow/async-interval-job.png)
 
 ## 📖 Usage
 ```js
@@ -49,10 +54,6 @@ async function gracefulShutdown() {
     // Can close the db connections here ...
 }
 ```
-
-## 🏆 Overview
-
-![image](https://github.com/a179346/async-interval-job/blob/main/flow/async-interval-job.png)
 
 ## 🤝 Contributing
 
