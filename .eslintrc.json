@@ -7,6 +7,7 @@
         "jest": true
     },
     "rules": {
+        "no-console": "error",
         "prettier/prettier": [
           "error",
           {

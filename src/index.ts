@@ -30,7 +30,9 @@ export class AsyncIntervalJob {
         this._handler = handler;
         this._intervalMs = intervalMs;
         this._options = Object.assign(defaultOptions, options);
-        this._timer = new Timer(this._loop);
+        this._timer = new Timer(() => {
+            this._loop();
+        });
 
         this._isHandling = false;
         this._isBeforeStop = false;

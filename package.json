@@ -4,8 +4,9 @@
   "description": "setInterval for promises and async functions. Support graceful shutdown and prevent multiple executions from overlapping in time.",
   "main": "dist/index.js",
   "scripts": {
-    "test": "mocha -b ./dist/test/*.test.js",
-    "build": "tsc"
+    "build": "tsc",
+    "test": "mocha -b --timeout 10000 ./dist/test/*.test.js",
+    "lint": "eslint ./src"
   },
   "author": "a179346",
   "license": "MIT",
@@ -60,6 +61,8 @@
     "node",
     "browser",
     "typescript",
-    "ts"
+    "ts",
+    "javascript",
+    "js"
   ]
 }
