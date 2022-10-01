@@ -52,7 +52,7 @@ async function gracefulShutdown() {
 
 ## 🏆 Overview
 
-![image](https://raw.githubusercontent.com/a179346/Holo-bot/main/flow/async-interval-job.png)
+![image](https://github.com/a179346/async-interval-job/blob/main/flow/async-interval-job.png)
 
 ## 🤝 Contributing
 
