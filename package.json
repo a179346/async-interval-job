@@ -1,0 +1,69 @@
+{
+  "name": "async-interval-job",
+  "version": "0.0.1",
+  "description": "setInterval for promises and async functions. Support graceful shutdown and prevent multiple executions from overlapping in time.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "mocha -b --timeout 10000 ./dist/test/*.test.js",
+    "lint": "eslint ./src"
+  },
+  "author": "a179346",
+  "license": "MIT",
+  "homepage": "https://github.com/a179346/async-interval-job#readme",
+  "dependencies": {
+    "nodejs-timer": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.3",
+    "@types/mocha": "^10.0.0",
+    "@types/node": "^18.7.23",
+    "@types/prettier": "^2.7.1",
+    "@typescript-eslint/eslint-plugin": "^5.38.1",
+    "@typescript-eslint/parser": "^5.38.1",
+    "chai": "^4.3.6",
+    "eslint": "^8.24.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "mocha": "^10.0.0",
+    "prettier": "^2.7.1",
+    "typescript": "^4.8.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a179346/async-interval-job.git"
+  },
+  "bugs": {
+    "url": "https://github.com/a179346/async-interval-job/issues"
+  },
+  "files": [
+    "dist/index.d.ts",
+    "dist/index.js",
+    "dist/index.js.map",
+    "LICENSE",
+    "README.md"
+  ],
+  "keywords": [
+    "async-interval-job",
+    "setInterval",
+    "interval",
+    "async-interval",
+    "repeat",
+    "timer",
+    "promise",
+    "promises",
+    "async",
+    "asynchronous",
+    "await",
+    "graceful",
+    "graceful-shutdown",
+    "concurrency",
+    "race",
+    "race-condition",
+    "node",
+    "typescript",
+    "ts",
+    "javascript",
+    "js"
+  ]
+}
