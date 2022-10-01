@@ -1,6 +1,7 @@
 import { Timer } from 'nodejs-timer';
 
 export interface AsyncIntervalJobOptions {
+    autoStart?: boolean;
     runImmediately?: boolean;
     stopOnError?: boolean;
 }
@@ -24,6 +25,7 @@ export class AsyncIntervalJob {
         validateOptions(options);
 
         const defaultOptions: Required<AsyncIntervalJobOptions> = {
+            autoStart: false,
             stopOnError: false,
             runImmediately: false,
         };
@@ -37,6 +39,8 @@ export class AsyncIntervalJob {
         this._isHandling = false;
         this._isBeforeStop = false;
         this._stopCallbacks = [];
+
+        if (this._options.autoStart) this.start();
     }
 
     public start(): void {
