@@ -48,6 +48,8 @@
     "setInterval",
     "interval",
     "async-interval",
+    "repeat",
+    "timer",
     "promise",
     "promises",
     "async",
