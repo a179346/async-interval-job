@@ -187,6 +187,11 @@ export function validateOptions(val: unknown): asserts val is AsyncIntervalJobOp
     if (typeof val === 'undefined') return;
     if (typeof val !== 'object' || val === null)
         throw new TypeError('Invalid "options". must be an object');
+    if ('autoStart' in val) {
+        const autoStart = (val as { autoStart: unknown }).autoStart;
+        if (typeof autoStart !== 'boolean' && typeof autoStart !== 'undefined')
+            throw new TypeError('Invalid "options.autoStart". must be a boolean');
+    }
     if ('runImmediately' in val) {
         const runImmediately = (val as { runImmediately: unknown }).runImmediately;
         if (typeof runImmediately !== 'boolean' && typeof runImmediately !== 'undefined')
