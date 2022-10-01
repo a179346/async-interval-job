@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { AsyncIntervalJob, AsyncIntervalJobState } from '..';
+import { AsyncIntervalJob, AsyncIntervalJobOptions, AsyncIntervalJobState } from '..';
 
 export const TIME_UNIT = 70;
 
@@ -28,7 +28,7 @@ export class AsyncIntervalJobTest {
     private _isResolved: boolean;
     private _isRejected: boolean;
 
-    constructor(jobTime: number, intervalTime: number) {
+    constructor(jobTime: number, intervalTime: number, options?: AsyncIntervalJobOptions) {
         this._isResolved = false;
         this._isRejected = false;
         this._resolve = () => {
@@ -45,15 +45,19 @@ export class AsyncIntervalJobTest {
         this._endHandleTime = 0;
         this._isStopping = false;
         this._timeoutIds = new Set();
-        this._job = new AsyncIntervalJob(async () => {
-            this._startHandleTime += 1;
-            await wait(jobTime);
-            if (this._errorFlag) {
-                this._errorFlag = false;
-                throw Error('test error');
-            }
-            this._endHandleTime += 1;
-        }, intervalTime * TIME_UNIT);
+        this._job = new AsyncIntervalJob(
+            async () => {
+                this._startHandleTime += 1;
+                await wait(jobTime);
+                if (this._errorFlag) {
+                    this._errorFlag = false;
+                    throw Error('test error');
+                }
+                this._endHandleTime += 1;
+            },
+            intervalTime * TIME_UNIT,
+            options
+        );
         this._errorFlag = false;
     }
 
