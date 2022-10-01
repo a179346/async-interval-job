@@ -1,20 +1,70 @@
 import { Timer } from 'nodejs-timer';
 
+/*!
+ * async-interval-job
+ * Home page: https://github.com/a179346/async-interval-job
+ * npm: https://www.npmjs.com/package/async-interval-job
+ */
+
+/**  =================== USAGE ==================
+
+    import { AsyncIntervalJob } from 'async-interval-job';
+
+    const job = new AsyncIntervalJob(async () => {
+        // Execute for each interval.
+    }, 60 * 1000);
+
+    job.start();
+
+    async function gracefulShutdown() {
+        await job.stop();
+        // Can close the db connections here ...
+    }
+
+ =============================================== */
+
 export interface AsyncIntervalJobOptions {
+    /**
+     * If true, Auto start interval job after constructor. Otherwise, `job.start()` should be called to start the job.
+     * default: false
+     */
     autoStart?: boolean;
+    /**
+     * If true, Start first handling when job start. Otherwise, Start first handling at `intervalMs` after job start.
+     * default: false
+     */
     runImmediately?: boolean;
+    /**
+     * If true, Job will be stopped when error occurred during handling, and won't exexcute next handling.
+     * default: false
+     */
     stopOnError?: boolean;
 }
 
 export type AsyncIntervalJobHandler = () => void | Promise<void>;
 
 export interface AsyncIntervalJobState {
+    /**
+     * True if the input handler is executing.
+     */
     isHandling: boolean;
+    /**
+     * True if the job is at the interval between handler execution.
+     */
     isWaitForNextHandle: boolean;
+    /**
+     * job.stop was called, and is now waiting for the handler execution finish.
+     */
     isBeforeStop: boolean;
 }
 
 export class AsyncIntervalJob {
+    /**
+     * Construtor of AsyncIntervalJob
+     * @param handler `MUST` Function to execute for each interval.
+     * @param intervalMs `MUST` Millisecond to wait between each function execution.
+     * @param options {AsyncIntervalJobOptions} `OPTIONAL`
+     */
     constructor(
         handler: AsyncIntervalJobHandler,
         intervalMs: number,
@@ -43,12 +93,20 @@ export class AsyncIntervalJob {
         if (this._options.autoStart) this.start();
     }
 
+    /**
+     * Start the Job
+     */
     public start(): void {
         if (this._isLooping) return;
         if (this._options.runImmediately) this._loop();
         else this._timer.start(this._intervalMs);
     }
-
+    /**
+     * Stop the job.
+     * @returns Promise -
+     *  If job isn't handling, will clear the interval and resolve the returned promise.
+     *  Otherwise, will wait until the handling finish and resolve the returned promise.
+     */
     public stop(): Promise<void> {
         return new Promise(resolve => {
             if (!this._isLooping) return resolve();
@@ -61,6 +119,10 @@ export class AsyncIntervalJob {
         });
     }
 
+    /**
+     * Get current state of the interval job
+     * @returns {AsyncIntervalJobState}
+     */
     public getState(): AsyncIntervalJobState {
         return {
             isHandling: this._isHandling,
@@ -121,7 +183,7 @@ export function validateIntervalMs(val: unknown): asserts val is number {
 }
 
 // @internal
-export function validateOptions(val: unknown): asserts val is AsyncIntervalJobOptions {
+export function validateOptions(val: unknown): asserts val is AsyncIntervalJobOptions | undefined {
     if (typeof val === 'undefined') return;
     if (typeof val !== 'object' || val === null)
         throw new TypeError('Invalid "options". must be an object');
