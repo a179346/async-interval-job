@@ -16,6 +16,24 @@ describe('[validateOptions]', () => {
             });
         });
 
+        describe('autoStart:', () => {
+            it('Input value.autoStart is true', () => {
+                checkShouldSuccess({
+                    autoStart: true,
+                });
+            });
+            it('Input value.autoStart is false', () => {
+                checkShouldSuccess({
+                    autoStart: false,
+                });
+            });
+            it('Input value.autoStart is undefined', () => {
+                checkShouldSuccess({
+                    autoStart: undefined,
+                });
+            });
+        });
+
         describe('runImmediately:', () => {
             it('Input value.runImmediately is true', () => {
                 checkShouldSuccess({
@@ -34,7 +52,7 @@ describe('[validateOptions]', () => {
             });
         });
 
-        describe('runImmediately:', () => {
+        describe('stopOnError:', () => {
             it('Input value.stopOnError is true', () => {
                 checkShouldSuccess({
                     stopOnError: true,
@@ -127,6 +145,82 @@ describe('[validateOptions]', () => {
             });
             it('Input value is string ("a")', () => {
                 checkShouldFail('a');
+            });
+        });
+
+        describe('autoStart', () => {
+            function checkShouldFail(val: unknown) {
+                expect(() => validateOptions({ autoStart: val })).to.throw(
+                    TypeError,
+                    'Invalid "options.autoStart". must be a boolean'
+                );
+            }
+
+            /**
+             * Number
+             */
+            it('Input value is Number (0)', () => {
+                checkShouldFail(0);
+            });
+            it('Input value is Number (NaN)', () => {
+                checkShouldFail(NaN);
+            });
+            it('Input value is Number (Infinity)', () => {
+                checkShouldFail(Infinity);
+            });
+            it('Input value is Number (-1)', () => {
+                checkShouldFail(-1);
+            });
+            it('Input value is Number (1)', () => {
+                checkShouldFail(1);
+            });
+            it('Input value is Number (0.1)', () => {
+                checkShouldFail(0.1);
+            });
+            it('Input value is Number (-0.1)', () => {
+                checkShouldFail(-0.1);
+            });
+
+            /**
+             * null
+             */
+            it('Input value is null', () => {
+                checkShouldFail(null);
+            });
+
+            /**
+             * object
+             */
+            it('Input value is object', () => {
+                checkShouldFail({});
+            });
+
+            /**
+             * function
+             */
+            it('Input value is function', () => {
+                checkShouldFail(() => {
+                    // pass
+                });
+            });
+
+            /**
+             * string
+             */
+            it('Input value is string ("")', () => {
+                checkShouldFail('');
+            });
+            it('Input value is string ("1")', () => {
+                checkShouldFail('1');
+            });
+            it('Input value is string ("10")', () => {
+                checkShouldFail('10');
+            });
+            it('Input value is string ("a")', () => {
+                checkShouldFail('a');
+            });
+            it('Input value is string ("true")', () => {
+                checkShouldFail('true');
             });
         });
 
