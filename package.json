@@ -4,7 +4,7 @@
   "description": "setInterval for promises and async functions. Support graceful shutdown and prevent multiple executions from overlapping in time.",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha -b ./dist/test/*.test.js",
     "build": "tsc"
   },
   "author": "a179346",
@@ -14,10 +14,13 @@
     "nodejs-timer": "^1.4.0"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.3",
+    "@types/mocha": "^10.0.0",
     "@types/node": "^18.7.23",
     "@types/prettier": "^2.7.1",
     "@typescript-eslint/eslint-plugin": "^5.38.1",
     "@typescript-eslint/parser": "^5.38.1",
+    "chai": "^4.3.6",
     "eslint": "^8.24.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
