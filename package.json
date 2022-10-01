@@ -1,6 +1,6 @@
 {
   "name": "async-interval-job",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "setInterval for promises and async functions. Support graceful shutdown and prevent multiple executions from overlapping in time.",
   "main": "dist/index.js",
   "scripts": {
